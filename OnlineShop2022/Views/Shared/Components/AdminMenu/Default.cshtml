@@ -1,0 +1,16 @@
+﻿@model IEnumerable<OnlineShop2022.Components.AdminMenuItem>
+
+<li class="nav-item dropdown mx-2">
+    <a asp-controller="Admin" asp-action="Index" class="dropdown-toggle btn btn-outline-light" data-toggle="dropdown" >
+        Admin<b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+        @foreach(var item in Model)
+        {
+            <li>
+                <a asp-area="Admin" asp-controller="@item.ControllerValue" asp-action="Index" class="dropdown-item">@item.DisplayValue</a>
+            </li>
+        }
+    </ul>
+</li>
+

@@ -1,0 +1,40 @@
+﻿@model List<OnlineShop2022.Models.ProductModel>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>Product Management</h1>
+
+ <a class="btn btn-primary mb-3" asp-action="Create">Add Product</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Image</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var product in Model)
+        {
+            <tr>
+                <th scope="row">@product.Id</th>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td><img src="@product.ImagePath" class="img-thumbnail img-product"></td>
+                <td>
+                    <a class="btn btn-secondary" asp-controller="Product" asp-action="Update" asp-route-id="@product.Id">Edit</a>
+                    <a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+</table>

@@ -1,0 +1,53 @@
+﻿@using OnlineShop2022.Models;
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<CustomUserModel> SignInManager
+@inject UserManager<CustomUserModel> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+@{
+    CustomUserModel currentUser;
+   
+}
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+         currentUser = await UserManager.FindByEmailAsync(User.Identity.Name);
+        <li class="nav-item mx-2">
+            <a class="btn btn-outline-light" asp-area="" asp-controller="Home" asp-action="Privacy" class="btn btn-outline-light ">Browse</a>
+        </li>
+         
+        <li  class="nav-item mx-2">
+            @await Component.InvokeAsync("ShoppingCartSummary")
+        </li>
+
+        @if (User.IsInRole("Manager"))
+        {
+            @await Component.InvokeAsync("AdminMenu")
+        }
+
+        @if (User.IsInRole("Admin"))
+        {
+            @await Component.InvokeAsync("ManagerMenu")
+
+        }
+
+        <li class="nav-item mx-2">
+            <a id="manage" class="btn btn-outline-light" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @currentUser.Fname !</a>
+        </li>
+        <li class="nav-item mx-2">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="btn btn-outline-dark">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item mx-2">
+            <a class="btn btn-outline-light" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item mx-2">
+            <a class="btn btn-outline-light" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

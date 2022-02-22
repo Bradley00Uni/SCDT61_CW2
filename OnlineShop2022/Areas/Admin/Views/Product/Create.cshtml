@@ -1,0 +1,37 @@
+﻿@model OnlineShop2022.Models.ProductViewModel
+
+<h1>Create</h1>
+
+<div class="container">
+    <form method="post" asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="">
+            <div class="mb-3">
+                <label for="Product.Description" class="form-label">Description</label>
+                <input asp-for="Product.Description" type="text" class="form-control" id="Product.Description" placeholder="Description" name="Product.Description">
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="Product.Price" class="form-label">Price</label>
+                <input asp-for="Product.Price" type="text" class="form-control" id="Product.Price" placeholder="Price" name="Product.Price">
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                 <label for="" class="form-label">Category</label>
+                @Html.DropDownListFor(m => m.Product.CategoryId, Model.Categories, "Select a category", new {@class = "form-select"})
+                <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="Product.ImagePath" class="form-label">Image</label>
+                <input class="form-control" asp-for="Product.ImagePath" type="file" id="Product.ImagePath" accept="image/*" name="Product.ImagePath">
+                <span asp-validation-for="Product.ImagePath" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-primary" type="submit">Add Product</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+

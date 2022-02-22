@@ -1,0 +1,38 @@
+﻿@using OnlineShop2022.Areas.Admin.Models
+@model IEnumerable<UserRolesViewModel>
+
+@{
+    ViewData["Title"] = "User Manager";
+}
+
+<h1>User Roles Management</h1>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>User ID</th>
+            <th>First Name</th>
+            <th>Surname</th>
+            <th>Role</th>
+            <th>Manage Roles</th>
+            <th>Manage Users</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.User.Id</td>
+                <td>@user.User.Fname</td>
+                <td>@user.User.Sname</td>
+                <td>@string.Join(" , ", user.Roles.ToList())</td>
+                <td>
+                    <a class="btn btn-secondary" asp-action="Manage" asp-route-id="@user.User.Id">Manage Roles</a>
+                </td>
+                 <td>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@user.User.Id">Delete User</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

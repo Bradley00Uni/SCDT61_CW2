@@ -1,0 +1,22 @@
+﻿@model IEnumerable<OnlineShop2022.Models.ProductModel>
+
+@{
+    ViewData["Title"] = "Products Page";
+}
+
+<div class="row">
+    @{
+        foreach (var product in Model)
+        {
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="@product.ImagePath" class="card-img-top img-product-main" alt="@product.">
+                    <div class="card-body">
+                        <p class="card-text">@product.Description</p>
+                         <p class="card-text">£@product.Price</p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

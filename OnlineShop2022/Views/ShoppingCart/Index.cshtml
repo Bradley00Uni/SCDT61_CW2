@@ -1,0 +1,45 @@
+﻿@model ShoppingCartViewModel
+
+<h2>Your shopping cart</h2>
+<h4>Here are the Products in your shopping cart.</h4>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            <th>Description</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var product in Model.ShoppingCart.ShoppingCartItems)
+        { 
+        <tr>
+            <td class="text-center">@product.Amount
+            
+             </td>
+            <td class="text-left">@product.Product.Description</td>
+            <td class="text-right">@product.Product.Price.ToString("c")</td>
+            <td class="text-right">
+                @((product.Amount*product.Product.Price).ToString("c"))
+                             <a class="btn btn-primary ms-3" asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-ProductId="@product.Product.Id">Remove</a>
+
+            </td>
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" class="text-right">Total:</td>
+            <td class="text-right">
+                @Model.ShoppingCartTotal.ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="text-center">
+    <a class="btn btn-primary" asp-controller="Order" asp-action="Checkout">Proceed to Checkout</a>
+    <a class="btn btn-danger ms-3" asp-controller="ShoppingCart" asp-action="ClearCart">Empty Basket</a>
+
+</div>

@@ -1,0 +1,33 @@
+﻿@using OnlineShop2022.Areas.Admin.Models
+@model List<ManageUserRoleViewModel>
+@{
+    ViewData["Title"] = "Manage";
+}
+
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Manage @Model.FirstOrDefault().User.Fname 's Roles</h2>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="form-check">
+                    <input type="hidden" asp-for="@Model[i].User.Id"/>
+                    <input type="hidden" asp-for="@Model[i].Role.Name"/>
+                    <input class="form-check-input" type="checkbox" asp-for="@Model[i].IsInRole">
+                    <label class="form-check-label">
+                        @Model[i].Role.Name
+                    </label>
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-secondary" type="submit">Update</button>
+            <a class="btn btn-danger" asp-action="Index">Cancel</a>
+        </div>
+    </div>
+</form>
+
+
+

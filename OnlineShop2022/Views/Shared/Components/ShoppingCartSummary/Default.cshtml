@@ -1,0 +1,12 @@
+﻿@using OnlineShop2022.Models
+@model ShoppingCartViewModel
+
+ <a asp-area="" asp-controller="ShoppingCart" asp-action="Index" class="btn btn-outline-light ">Your Cart
+
+     <span class="glyphicon glyphicon-shopping-cart"></span>
+            <span id="cart-status">
+                @Model.ShoppingCart.ShoppingCartItems.Sum(x => x.Amount)
+            </span>
+
+ </a>
+   
