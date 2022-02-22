@@ -93,7 +93,7 @@ namespace UnitTests
         }
 
         [Fact] //Test to check if Products can be created
-        public async void ProductControllerCreateProduct()
+        public async void ProductControllerCreateProductSuccessful()
         {
             //Arrange : Create the mock database, images and controller
             CreateMockDB();
@@ -112,6 +112,22 @@ namespace UnitTests
             Assert.NotNull(result);
 
 
+        }
+
+        [Fact]
+        public async void ProductControllerDeleteProductSuccessful()
+        {
+            //Arrange : Create the mock database, images and controller
+            PopulateMockDB();
+            _images = new Images(_webHostEnvironment);
+            ProductController controller = new ProductController(_db, _webHostEnvironment, _images);
+
+            var productList = await _db.Products.ToListAsync();
+            var product = productList[0];
+
+            var result = await controller.Delete(product.Id, product);
+
+            Assert.NotNull(result);
         }
     }
 }
