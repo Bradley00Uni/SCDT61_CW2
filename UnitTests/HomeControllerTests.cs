@@ -29,15 +29,19 @@ namespace UnitTests
         {
             CreateMockDB(); //Calls the function to create a mock database
 
-            //Three products, that have basic information in the required ID and Description fields
-            var productA = new ProductModel() { Description = "Test Product A", Id = 1 };
+            //Five products, that have basic information in the required ID and Description fields
+            var productA = new ProductModel() { Id = 1, Description = "Test Product A" };
             var productB = new ProductModel() { Id = 2, Description = "Test Product B" };
             var productC = new ProductModel() { Id = 3, Description = "Test Product C" };
+            var productD = new ProductModel() { Id = 4, Description = "Test Product D" };
+            var productE = new ProductModel() { Id = 5, Description = "Test Product E" };
 
-            //Adds these three products to the mock database
-            await _db.Products.AddAsync(productA);
-            await _db.Products.AddAsync(productB);
-            await _db.Products.AddAsync(productC);
+            //Adds these mock products to the database
+            ProductModel[] p = new ProductModel[] { productA, productB, productC, productD, productE };
+            foreach (var product in p)
+            {
+                _db.Products.Add(product);
+            }
 
             await _db.SaveChangesAsync(); //save changes to the database
         }
