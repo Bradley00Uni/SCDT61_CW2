@@ -8,6 +8,8 @@ using OnlineShop2022.Data;
 using OnlineShop2022.Helpers;
 using OnlineShop2022.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace UnitTests
@@ -33,11 +35,11 @@ namespace UnitTests
             CreateMockDB(); //Calls the function to create a mock database
 
             //Five products, that have basic information in the required ID and Description fields
-            var productA = new ProductModel() { Id = 1, Description = "Test Product A" };
-            var productB = new ProductModel() { Id = 2, Description = "Test Product B" };
-            var productC = new ProductModel() { Id = 3, Description = "Test Product C" };
-            var productD = new ProductModel() { Id = 4, Description = "Test Product D" };
-            var productE = new ProductModel() { Id = 5, Description = "Test Product E" };
+            var productA = new ProductModel() { Id = 1, Description = "Test Product A", Price = 10 };
+            var productB = new ProductModel() { Id = 2, Description = "Test Product B", Price = 20 };
+            var productC = new ProductModel() { Id = 3, Description = "Test Product C", Price = 30 };
+            var productD = new ProductModel() { Id = 4, Description = "Test Product D", Price = 40 };
+            var productE = new ProductModel() { Id = 5, Description = "Test Product E", Price = 50 };
 
             //Adds these mock products to the database
             ProductModel[] p = new ProductModel[] { productA, productB, productC, productD, productE };
@@ -114,6 +116,28 @@ namespace UnitTests
             var result = controller.ClearCart();
 
             Assert.NotNull(result);
+        }
+
+        [Fact]
+        private async void ShoppingCartTotalIsAccurate()
+        {
+            PopulateMockDB();
+            CreateMockRepository();
+
+            ShoppingCartController controller = new ShoppingCartController(_ProductRepository, _shoppingCart);
+            PopulateMockRepository(controller);
+
+            var model = new ShoppingCartModel(_db) { ShoppingCartId = _shoppingCart.ShoppingCartId, ShoppingCartItems = _shoppingCart.ShoppingCartItems };
+
+            var products = await _db.Products.ToListAsync();
+            List<double> prices = new List<double>();
+            
+            foreach (var p in products) { prices.Add(p.Price); }
+            var expectedTotal = prices.Sum();
+
+            var result = model.GetShoppingCartTotal();
+
+            Assert.Equal(expectedTotal, result);
         }
     }
 }
