@@ -107,13 +107,13 @@ namespace UnitTests
             //Act : produce a variable that can be assessed - the returned result from passing the new product to the controller
             var result = await controller.Create(productViewModel);
 
-            //Assert : Check the error code returned for an null update attempt, where the product Id does not match the Id within the product view model
+            //Assert : Check the returned view from the function, if view is null then the action failed
             Assert.NotNull(result);
 
 
         }
 
-        [Fact]
+        [Fact] //Test to checj if Products can be deleted
         public async void ProductControllerDeleteProductSuccessful()
         {
             //Arrange : Create the mock database, images and controller
@@ -121,11 +121,15 @@ namespace UnitTests
             _images = new Images(_webHostEnvironment);
             ProductController controller = new ProductController(_db, _webHostEnvironment, _images);
 
+            //Create local instance of the Products stored in the database
             var productList = await _db.Products.ToListAsync();
+            //Get the details of an exisiting product to be used for the delete function
             var product = productList[0];
 
+            //Act : produce a variable that can be assessed - the returned result of removing a product from the database
             var result = await controller.Delete(product.Id, product);
 
+            //Assert : Check the returned view from the function, if view is null then the action failed
             Assert.NotNull(result);
         }
     }

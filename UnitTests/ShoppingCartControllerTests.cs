@@ -51,14 +51,15 @@ namespace UnitTests
             await _db.SaveChangesAsync(); //save changes to the database
         }
 
-        private void CreateMockRepository()
+        private void CreateMockRepository() //When called, the Product Repository and Shopping Cart needed for handling database modification by the Shopping Cart Controller are instantiated
         {
             _ProductRepository = new ProductRepository(_db);
             _shoppingCart = new ShoppingCartModel(_db);
         }
 
-        private async void PopulateMockRepository(ShoppingCartController controller)
+        private async void PopulateMockRepository(ShoppingCartController controller) //When Called, the mock Shopping Cart is populated with products from the database
         {
+            //Adds all products created in the PopulateMockDB funtion to the Shopping Cart
             var products = await _db.Products.ToListAsync();
 
             foreach (var p in products)
@@ -67,76 +68,90 @@ namespace UnitTests
             }
         }
 
-        [Fact]
-        private async void ShoppingCartAddToCartSuccessfull()
+        [Fact] //Test to check new products can be added to the user's shopping cart
+        private async void ShoppingCartAddToCartSuccessfull() 
         {
+            //Arrange : Creates and Populates the Database, Repository and Shopping Cart needed by the Controller
             PopulateMockDB();
             CreateMockRepository();
             ShoppingCartController controller = new ShoppingCartController(_ProductRepository, _shoppingCart);
             var products = await _db.Products.ToListAsync();
+
+            //Creates a new Product type, which is subsequently added to the database so that it can be referenced by methods in the Controller
             var toAdd = new ProductModel() { Id = 6, Description = "New Product", Price = 4.99 };
             _db.Products.Add(toAdd);
             PopulateMockRepository(controller);
 
+            //Act : Produces a variable that can be assessed - a local instance of the shopping cart after attempting to add a product
             controller.AddToShoppingCart(toAdd.Id);
-
             var newCart = _shoppingCart.GetShoppingCartItems();
 
+            //Assert : The Test Passes if the Product Count in the Cart is one higher than the list of Products. As by default the number of products is five, an increase means that a new product is present in the Cart
             Assert.Equal((products.Count + 1), newCart.Count);
         }
 
-        [Fact]
+        [Fact] //Test to check products can be removed from the user's shopping cart
         private async void ShoppingCartRemoveFromCartSuccessfull()
         {
+            //Arrange : Creates and Populates the Database, Repository and Shopping Cart needed by the Controller
             PopulateMockDB();
             CreateMockRepository();
 
             ShoppingCartController controller = new ShoppingCartController(_ProductRepository, _shoppingCart);
             PopulateMockRepository(controller);
 
+            //Takes a product from the Database to be removed from the user's cart. As the product list is additionally used to populate the Product Repository, this variable is guaranteed to match one present in the mock Shopping Cart
             var products = await _db.Products.ToListAsync();
             var toRemove = products[2].Id;
 
+            //Act : Produces a variable that can be assessed - a local instance of the shopping cart after attempting to remove a product
             controller.RemoveFromShoppingCart(toRemove);
-
             var newCart = _shoppingCart.GetShoppingCartItems();
 
+            //Assert : The Test Passes if the Product Count in the Cart is one less than the list of Products. This means that a new product has been successfully removed, shown by less instances in the new cart when compared to the original count
             Assert.Equal((products.Count - 1), newCart.Count);
         }
 
-        [Fact]
+        [Fact] //Test to check a user's shopping cart can be cleared/emptied
         private void ShoppingCartClearCartSuccessfull()
         {
+            //Arrange : Creates and Populates the Database, Repository and Shopping Cart needed by the Controller
             PopulateMockDB();
             CreateMockRepository();
 
             ShoppingCartController controller = new ShoppingCartController(_ProductRepository, _shoppingCart);
             PopulateMockRepository(controller);
 
+            //Act : Produce a variable that can be assessed - the result of the attempt to clear the cart
             var result = controller.ClearCart();
 
+            //Assert : Check that a response is sent by the method to clear the cart. If a result is present, then the function executed successfully
             Assert.NotNull(result);
         }
 
-        [Fact]
+        [Fact] //Test to check the total calculated from the user's shopping cart is accurate
         private async void ShoppingCartTotalIsAccurate()
         {
+            //Arrange : Creates and Populates the Database, Repository and Shopping Cart needed by the Controller
             PopulateMockDB();
             CreateMockRepository();
 
             ShoppingCartController controller = new ShoppingCartController(_ProductRepository, _shoppingCart);
             PopulateMockRepository(controller);
 
+            //Instantiates a new Shopping Cart model so that the assosciated method for calcualting the total can be accessed
             var model = new ShoppingCartModel(_db) { ShoppingCartId = _shoppingCart.ShoppingCartId, ShoppingCartItems = _shoppingCart.ShoppingCartItems };
 
             var products = await _db.Products.ToListAsync();
             List<double> prices = new List<double>();
             
+            //Act : Produces two variables that can be assessed - The expectedTotal variable is shows what the order total should be from the products in the cart, whilst the result variable is the outcome of the attempt to retrieve the total from the method
             foreach (var p in products) { prices.Add(p.Price); }
             var expectedTotal = prices.Sum();
 
             var result = model.GetShoppingCartTotal();
 
+            //Assert : Checks that the total returned matches the expected outcome - The test will pass if the two values are equal
             Assert.Equal(expectedTotal, result);
         }
     }
