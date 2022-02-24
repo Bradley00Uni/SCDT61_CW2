@@ -14,7 +14,6 @@ namespace UnitTests
 {
     public class ProductControllerTests
     {
-        private ILogger<HomeController> _logger;
         private AppDbContext _db;
         private IWebHostEnvironment _webHostEnvironment;
         private Images _images;
