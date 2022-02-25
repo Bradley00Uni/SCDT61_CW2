@@ -74,7 +74,7 @@ namespace UnitTests
         }
 
         [Fact] //Test to check the populated Product Database can be successfully retrieved within the Home Controller
-        public async void HomeControllerGetProductsNotNull()
+        public async void HomeControllerGetProductsSuccess()
         {
             //Arrange : Create and Populate the mock database
             PopulateMockDB();

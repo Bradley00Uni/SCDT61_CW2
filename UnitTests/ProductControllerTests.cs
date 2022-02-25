@@ -76,7 +76,7 @@ namespace UnitTests
 
 
         [Fact] //Test to Check that the returned error for a null request is handled correctly
-        public async void ProductUpdateIDIsNull()
+        public async void ProductUpdateProductIDIsNull()
         {
             //Arrange : Create the mock database, images and controller
             PopulateMockDB();
@@ -113,7 +113,7 @@ namespace UnitTests
 
         }
 
-        [Fact] //Test to checj if Products can be deleted
+        [Fact] //Test to check if Products can be deleted
         public async void ProductControllerDeleteProductSuccessful()
         {
             //Arrange : Create the mock database, images and controller
