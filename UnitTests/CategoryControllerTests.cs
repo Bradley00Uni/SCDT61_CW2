@@ -81,6 +81,66 @@ namespace UnitTests
 
             Assert.Equal(result.Model, _existingCategory);
         }
+
+        [Fact]
+        public async void CategoryControllerCreateSuccessfull()
+        {
+            CreateMockDB();
+            var controller = new CategoryController(_db);
+            var newCategory = new CategoryModel() { Id = 1, Name = "Created Product"};
+
+            var result = await controller.Create(newCategory);
+
+            Assert.NotNull(result);
+            Assert.Contains(newCategory, _db.Categories);
+        }
+
+        [Fact]
+        public async void CategoryControllerCreateExistingCategory()
+        {
+            PopulateMockDB();
+            var controller = new CategoryController(_db);
+            var newCategory = new CategoryModel() { Id = 1, Name = "Test Category A" };
+
+            var result = await controller.Create(newCategory);
+
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public async void CategoryControllerEditSuccessfull()
+        {
+            PopulateMockDB();
+            var controller = new CategoryController(_db);
+            SetExistingCategory(1);
+
+            var result = await controller.Edit(_existingCategory.Id) as ViewResult;
+
+            Assert.NotNull(result.ViewData);
+        }
+
+        [Fact]
+        public async void CategoryControllerEditIDNotEqual()
+        {
+            PopulateMockDB();
+            var controller = new CategoryController(_db);
+
+            var result = await controller.Edit(12) as NotFoundResult;
+
+            Assert.Equal("404", result.StatusCode.ToString());
+        }
+
+        [Fact]
+        public async void CategoryControllerDeleteSuccessful()
+        {
+            PopulateMockDB();
+            var controller = new CategoryController(_db);
+            SetExistingCategory(1);
+
+            var result = await controller.DeleteConfirmed(_existingCategory.Id);
+
+            Assert.NotNull(result);
+            Assert.DoesNotContain(_existingCategory, _db.Categories);
+        }
     }
 }
-       
