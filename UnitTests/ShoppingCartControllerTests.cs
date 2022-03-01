@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using OnlineShop2022.Areas.Admin;
+﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop2022.Controllers;
 using OnlineShop2022.Data;
-using OnlineShop2022.Helpers;
 using OnlineShop2022.Models;
 using System;
 using System.Collections.Generic;
@@ -69,7 +64,7 @@ namespace UnitTests
         }
 
         [Fact] //Test to check new products can be added to the user's shopping cart
-        private async void ShoppingCartAddToCartSuccessfull() 
+        private async void ShoppingCartAddToCartSuccessful() 
         {
             //Arrange : Creates and Populates the Database, Repository and Shopping Cart needed by the Controller
             PopulateMockDB();
@@ -91,7 +86,7 @@ namespace UnitTests
         }
 
         [Fact] //Test to check products can be removed from the user's shopping cart
-        private async void ShoppingCartRemoveFromCartSuccessfull()
+        private async void ShoppingCartRemoveFromCartSuccessful()
         {
             //Arrange : Creates and Populates the Database, Repository and Shopping Cart needed by the Controller
             PopulateMockDB();
@@ -113,7 +108,7 @@ namespace UnitTests
         }
 
         [Fact] //Test to check a user's shopping cart can be cleared/emptied
-        private void ShoppingCartClearCartSuccessfull()
+        private void ShoppingCartClearCartSuccessful()
         {
             //Arrange : Creates and Populates the Database, Repository and Shopping Cart needed by the Controller
             PopulateMockDB();

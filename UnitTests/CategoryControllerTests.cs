@@ -58,7 +58,7 @@ namespace UnitTests
         }
 
         [Fact] //Test to check the details of a category can be retrievd through the controller
-        public async void CategoryControllerDetailsRetrievalSuccessfull()
+        public async void CategoryControllerDetailsRetrievalSuccessful()
         {
             //Arrange : Create the mock database and controller
             PopulateMockDB();
@@ -87,7 +87,7 @@ namespace UnitTests
         }
 
         [Fact] //Test to check if a new category can be added to the database through the controller
-        public async void CategoryControllerCreateSuccessfull()
+        public async void CategoryControllerCreateSuccessful()
         {
             //Arrange : Create the mock database and controller
             CreateMockDB();

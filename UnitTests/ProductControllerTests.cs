@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using OnlineShop2022.Areas.Admin;
-using OnlineShop2022.Controllers;
 using OnlineShop2022.Data;
 using OnlineShop2022.Helpers;
 using OnlineShop2022.Models;
