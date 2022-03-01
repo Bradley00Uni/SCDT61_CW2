@@ -177,7 +177,10 @@ namespace OnlineShop2022.Areas.Admin
             _db.Products.Remove(productToDelete);
             await _db.SaveChangesAsync();
 
-            _images.Delete(productToDelete.ImagePath);
+            if (productToDelete.ImagePath != null)
+            {
+                _images.Delete(productToDelete.ImagePath);
+            } 
 
             return RedirectToAction(nameof(Index));
 
