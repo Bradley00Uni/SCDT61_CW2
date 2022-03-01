@@ -138,7 +138,7 @@ namespace UnitTests
         }
 
         [Fact] //Test to validate controller correctly handles an attempt to edit a non-existent category
-        public async void CategoryControllerEditIDNotEqual()
+        public async void CategoryControllerEditIDNotValid()
         {
             //Arrange : Create the mock database and controller
             PopulateMockDB();
