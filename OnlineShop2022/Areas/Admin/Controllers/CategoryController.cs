@@ -31,8 +31,6 @@ namespace OnlineShop2022.Areas.Admin
         // GET: Admin/Category/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            return NotFound();
-
             if (id == null)
             {
                 return NotFound();
@@ -63,9 +61,18 @@ namespace OnlineShop2022.Areas.Admin
         {
             if (ModelState.IsValid)
             {
-                _context.Add(categoryModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if(_context.Categories.Any(c => c.Id == categoryModel.Id) || _context.Categories.Any(c => c.Name == categoryModel.Name))
+                {
+                    string errorMessage = "Category '" + categoryModel.Name + "' Already Exists";
+                    ViewData["CategoryCreate"] = errorMessage;
+                    return View();
+                }
+                else
+                {
+                    _context.Add(categoryModel);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(categoryModel);
         }
