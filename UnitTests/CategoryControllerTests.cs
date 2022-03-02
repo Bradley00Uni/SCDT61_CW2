@@ -43,6 +43,7 @@ namespace UnitTests
             _existingCategory = categories.Find(x => x.Id == id); //Sets the variable based on passed ID
         }
 
+
         [Fact] //Test to check the Index area of the Category Controller is not null
         public void CategoryControllerIndexNotNull()
         {
