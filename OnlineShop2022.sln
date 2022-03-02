@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShop2022", "OnlineSho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{7D7D6E54-BA40-46D9-A507-9BC61706ACFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTests", "SeleniumTests\SeleniumTests.csproj", "{FC8E31C3-ADB6-402A-912B-B71CD6BB70D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumTests", "SeleniumTests\SeleniumTests.csproj", "{B6B0B429-D777-469A-9C2A-AF9C0A142780}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{7D7D6E54-BA40-46D9-A507-9BC61706ACFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D7D6E54-BA40-46D9-A507-9BC61706ACFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D7D6E54-BA40-46D9-A507-9BC61706ACFF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FC8E31C3-ADB6-402A-912B-B71CD6BB70D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC8E31C3-ADB6-402A-912B-B71CD6BB70D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC8E31C3-ADB6-402A-912B-B71CD6BB70D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC8E31C3-ADB6-402A-912B-B71CD6BB70D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B0B429-D777-469A-9C2A-AF9C0A142780}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B0B429-D777-469A-9C2A-AF9C0A142780}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B0B429-D777-469A-9C2A-AF9C0A142780}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B0B429-D777-469A-9C2A-AF9C0A142780}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
