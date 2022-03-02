@@ -31,4 +31,10 @@
     <None Include="wwwroot\js\checkout.js" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\App.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

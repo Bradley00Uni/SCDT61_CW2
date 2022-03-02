@@ -1,23 +1,14 @@
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using System.Threading;
+using System;
+using Xunit;
 
 namespace SeleniumTests
 {
-    public class Tests
+    public class UnitTest1
     {
-        IWebDriver driver = new ChromeDriver("D\\Level 6\\SCDT61 -  Software Development & QA\\Assignments\\Assignment 2\\chromedriver");
-
-        [SetUp]
-        public void Setup()
-        {
-        }
-
-        [Test]
+        [Fact]
         public void Test1()
         {
-            Assert.Pass();
+
         }
     }
 }
