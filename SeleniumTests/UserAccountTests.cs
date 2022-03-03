@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System;
 using System.Threading;
 
 namespace SeleniumTests
@@ -37,6 +38,22 @@ namespace SeleniumTests
             loginName = "customer";
             loginPassword = "Customer123!";
             loginEmail = "customer@customer.com";
+        }
+
+        private void Login(string role)
+        {
+            driver.Navigate().GoToUrl("https://onlineshop202220220302112626.azurewebsites.net/Identity/Account/Login");
+
+            if(role == "admin") { PopulateAdmin(); }
+            else if(role == "manager") { PopulateManager(); }
+            else if(role == "customer") { PopulateCustomer(); }
+
+            IWebElement emailInput = driver.FindElement(By.Id("Input_Email"));
+            emailInput.SendKeys(loginEmail);
+            IWebElement passwordInput = driver.FindElement(By.Id("Input_Password"));
+            passwordInput.SendKeys(loginPassword);
+            emailInput.SendKeys(Keys.Return);
+            Thread.Sleep(1000);
         }
 
         public void Logout()
@@ -124,11 +141,76 @@ namespace SeleniumTests
             Thread.Sleep(1000);
 
             //Checks if the URL has changed, indicating a successful page load. If true, pass the test, else fail. Page will only change on successful register/login
-            if (driver.Url != currentURL){ Assert.Pass();}
+            if (driver.Url != currentURL){ Assert.Pass(); Logout(); }
             else{ Assert.Fail(); }
         }
 
-        
+        [Test] //Test to validate the NavBar menus that require certain roles, only show when users are Authorised
+        public void MenusRestrictedToAuthorisedAccounts()
+        {
+            IWebElement adminButton = null;
+            IWebElement managerButton = null;
+
+            Login("admin");
+            try
+            {
+                adminButton = driver.FindElement(By.Id("adminLink"));
+                managerButton = driver.FindElement(By.Id("managerLink"));
+            }
+            catch{}
+
+            if(adminButton == null || managerButton == null)
+            {
+                Assert.Fail();
+                Console.WriteLine("Admin Failed");
+                End();
+            }
+            else
+            {
+                Logout();
+                adminButton = managerButton = null;
+            }
+
+            Login("manager");
+            try
+            {
+                adminButton = driver.FindElement(By.Id("adminLink"));
+                managerButton = driver.FindElement(By.Id("managerLink"));
+            }
+            catch {}
+
+            if(managerButton == null || adminButton != null)
+            {
+                Assert.Fail();
+                Console.WriteLine("Manager Failed");
+                End();
+            }
+            else
+            {
+                Logout();
+                adminButton = managerButton = null;
+            }
+
+            Login("customer");
+            try
+            {
+                adminButton = driver.FindElement(By.Id("adminLink"));
+                managerButton = driver.FindElement(By.Id("managerLink"));
+            }
+            catch {}
+
+            if(adminButton != null || managerButton != null)
+            {
+                Assert.Fail();
+                Console.WriteLine("Customer Failed");
+            }
+            else
+            {
+                Logout();
+                Assert.Pass();
+            }
+
+        }
 
         [OneTimeTearDown]
         public void End(){ driver.Close(); }

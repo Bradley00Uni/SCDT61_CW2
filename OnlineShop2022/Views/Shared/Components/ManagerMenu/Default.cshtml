@@ -8,7 +8,7 @@
         @foreach(var item in Model)
         {
             <li>
-                <a asp-area="Admin" asp-controller="@item.ControllerValue" asp-action="Index" class="dropdown-item">@item.DisplayValue</a>
+                <a asp-area="Admin" asp-controller="@item.ControllerValue" asp-action="Index" class="dropdown-item" id="managerLink">@item.DisplayValue</a>
             </li>
         }
     </ul>
