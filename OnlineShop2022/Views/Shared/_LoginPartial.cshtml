@@ -21,12 +21,12 @@
             @await Component.InvokeAsync("ShoppingCartSummary")
         </li>
 
-        @if (User.IsInRole("Manager"))
+        @if (User.IsInRole("Admin"))
         {
             @await Component.InvokeAsync("AdminMenu")
         }
 
-        @if (User.IsInRole("Admin"))
+        @if (User.IsInRole("Manager"))
         {
             @await Component.InvokeAsync("ManagerMenu")
 

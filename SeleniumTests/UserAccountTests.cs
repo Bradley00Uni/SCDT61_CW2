@@ -40,6 +40,7 @@ namespace SeleniumTests
             loginEmail = "customer@customer.com";
         }
 
+        //Method that when called, enters valid login credentials based on passed role
         private void Login(string role)
         {
             driver.Navigate().GoToUrl("https://onlineshop202220220302112626.azurewebsites.net/Identity/Account/Login");
@@ -56,6 +57,7 @@ namespace SeleniumTests
             Thread.Sleep(1000);
         }
 
+        //Method that when called, logs out the current user
         public void Logout()
         {
             IWebElement logoutButton = driver.FindElement(By.Id("logout"));
@@ -148,17 +150,22 @@ namespace SeleniumTests
         [Test] //Test to validate the NavBar menus that require certain roles, only show when users are Authorised
         public void MenusRestrictedToAuthorisedAccounts()
         {
+            //Declare the elements that will be checked
             IWebElement adminButton = null;
             IWebElement managerButton = null;
 
+            //Passes the Admin role to log in
             Login("admin");
+            
+            //Attempts to find the buttons used to access role-specific menus
             try
-            {
-                adminButton = driver.FindElement(By.Id("adminLink"));
-                managerButton = driver.FindElement(By.Id("managerLink"));
-            }
+            { adminButton = driver.FindElement(By.Id("adminLink")); }
+            catch {}
+
+            try { managerButton = driver.FindElement(By.Id("managerLink")); }
             catch{}
 
+            //In the event the correct menus aren't shown - fail the test. Otherwise, reset the elements and log out
             if(adminButton == null || managerButton == null)
             {
                 Assert.Fail();
@@ -171,15 +178,19 @@ namespace SeleniumTests
                 adminButton = managerButton = null;
             }
 
+            //Passes the Manager role to log in
             Login("manager");
-            try
-            {
-                adminButton = driver.FindElement(By.Id("adminLink"));
-                managerButton = driver.FindElement(By.Id("managerLink"));
-            }
-            catch {}
 
-            if(managerButton == null || adminButton != null)
+            //Attempts to find the buttons used to access role-specific menus
+            try
+            { adminButton = driver.FindElement(By.Id("adminLink")); }
+            catch { }
+
+            try { managerButton = driver.FindElement(By.Id("managerLink")); }
+            catch { }
+
+            //In the event the correct menus aren't shown - fail the test. Otherwise, reset the elements and log out
+            if (managerButton == null || adminButton != null)
             {
                 Assert.Fail();
                 Console.WriteLine("Manager Failed");
@@ -191,15 +202,19 @@ namespace SeleniumTests
                 adminButton = managerButton = null;
             }
 
+            //Passes the Customer role to log in
             Login("customer");
-            try
-            {
-                adminButton = driver.FindElement(By.Id("adminLink"));
-                managerButton = driver.FindElement(By.Id("managerLink"));
-            }
-            catch {}
 
-            if(adminButton != null || managerButton != null)
+            //Attempts to find the buttons used to access role-specific menus
+            try
+            { adminButton = driver.FindElement(By.Id("adminLink")); }
+            catch { }
+
+            try { managerButton = driver.FindElement(By.Id("managerLink")); }
+            catch { }
+
+            //In the event the correct menus aren't shown - fail the test. Otherwise, log out and pass the test
+            if (adminButton != null || managerButton != null)
             {
                 Assert.Fail();
                 Console.WriteLine("Customer Failed");
