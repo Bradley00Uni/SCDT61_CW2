@@ -23,6 +23,22 @@ namespace SeleniumTests
             loginEmail = "admin@admin.com";
         }
 
+        //Method that when called, sets the login variables to the Manager credentials
+        private void PopulateManager()
+        {
+            loginName = "manager";
+            loginPassword = "Manager123!";
+            loginEmail = "manager@manager.com";
+        }
+
+        //Method that when called, sets the login variables to the Customer credentials
+        private void PopulateCustomer()
+        {
+            loginName = "customer";
+            loginPassword = "Customer123!";
+            loginEmail = "customer@customer.com";
+        }
+
         public void Logout()
         {
             IWebElement logoutButton = driver.FindElement(By.Id("logout"));
@@ -111,6 +127,8 @@ namespace SeleniumTests
             if (driver.Url != currentURL){ Assert.Pass();}
             else{ Assert.Fail(); }
         }
+
+        
 
         [OneTimeTearDown]
         public void End(){ driver.Close(); }

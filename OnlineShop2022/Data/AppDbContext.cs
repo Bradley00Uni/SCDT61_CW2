@@ -24,6 +24,8 @@ namespace OnlineShop2022.Data
 
             base.OnModelCreating(builder);
             SeedAdmin(builder);
+            SeedManager(builder);
+            SeedCustomer(builder);
             SeedRoles(builder);
             SeedUserRoles(builder);
         }
@@ -84,6 +86,42 @@ namespace OnlineShop2022.Data
 
         }
 
+        private void SeedManager(ModelBuilder builder)
+        {
+            PasswordHasher<CustomUserModel> hasher = new PasswordHasher<CustomUserModel>();
+            CustomUserModel manager = new CustomUserModel();
+            manager.Id = "27b9af34-a133-43e2-8dd2-aef04ddb2b8d";
+            manager.UserName = "manager@manager.com";
+            manager.NormalizedUserName = "manager@manager.com".ToUpper();
+            manager.NormalizedEmail = "manager@manager.com".ToUpper();
+            manager.Email = "manager@manager.com";
+            manager.LockoutEnabled = false;
+            manager.Fname = "Manager";
+            manager.Sname = "Manager";
+            manager.ConcurrencyStamp = "8b483dfe-e56c-4d5b-97cd-b32652794d29";
+            manager.PasswordHash = hasher.HashPassword(manager, "Manager123!");
+
+            builder.Entity<CustomUserModel>().HasData(manager);
+        }
+
+        private void SeedCustomer(ModelBuilder builder)
+        {
+            PasswordHasher<CustomUserModel> hasher = new PasswordHasher<CustomUserModel>();
+            CustomUserModel customer = new CustomUserModel();
+            customer.Id = "27b9af34-a133-43e2-8dd2-aef04ddb2b8e";
+            customer.UserName = "customer@customer.com";
+            customer.NormalizedUserName = "customer@customer.com".ToUpper();
+            customer.NormalizedEmail = "customer@customer.com".ToUpper();
+            customer.Email = "customer@customer.com";
+            customer.LockoutEnabled = false;
+            customer.Fname = "Customer";
+            customer.Sname = "Customer";
+            customer.ConcurrencyStamp = "9b483dfe-e56c-4d5b-97cd-b32652794d29";
+            customer.PasswordHash = hasher.HashPassword(customer, "Customer123!");
+
+            builder.Entity<CustomUserModel>().HasData(customer);
+        }
+
         private void SeedUserRoles(ModelBuilder builder)
         {
             builder.Entity<IdentityUserRole<string>>().HasData(
@@ -109,6 +147,30 @@ namespace OnlineShop2022.Data
                  RoleId = "709a40af-4a4e-40b6-887b-d30dcdf07030",
                  UserId = "27b9af34-a133-43e2-8dd2-aef04ddb2b8c"
              });
+
+            builder.Entity<IdentityUserRole<string>>().HasData(
+
+             new IdentityUserRole<string>()
+             {
+                 RoleId = "ecfbe7ad-bb6b-49e6-ac2b-6359a73fbf02",
+                 UserId = "27b9af34-a133-43e2-8dd2-aef04ddb2b8d"
+             });
+
+            builder.Entity<IdentityUserRole<string>>().HasData(
+
+             new IdentityUserRole<string>()
+             {
+                 RoleId = "709a40af-4a4e-40b6-887b-d30dcdf07030",
+                 UserId = "27b9af34-a133-43e2-8dd2-aef04ddb2b8d"
+             });
+
+            builder.Entity<IdentityUserRole<string>>().HasData(
+
+            new IdentityUserRole<string>()
+            {
+                RoleId = "ecfbe7ad-bb6b-49e6-ac2b-6359a73fbf02",
+                UserId = "27b9af34-a133-43e2-8dd2-aef04ddb2b8e"
+            });
 
         }
     }

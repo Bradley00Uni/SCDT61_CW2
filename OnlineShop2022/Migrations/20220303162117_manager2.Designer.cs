@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop2022.Data;
 
 namespace OnlineShop2022.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220303162117_manager2")]
+    partial class manager2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,11 +174,6 @@ namespace OnlineShop2022.Migrations
                         {
                             UserId = "27b9af34-a133-43e2-8dd2-aef04ddb2b8d",
                             RoleId = "709a40af-4a4e-40b6-887b-d30dcdf07030"
-                        },
-                        new
-                        {
-                            UserId = "27b9af34-a133-43e2-8dd2-aef04ddb2b8e",
-                            RoleId = "ecfbe7ad-bb6b-49e6-ac2b-6359a73fbf02"
                         });
                 });
 
@@ -297,9 +294,9 @@ namespace OnlineShop2022.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAZ/eM/JBWI88hOdTsKR8sNb3mVKN/Vd55LvTT6gszxjZm0ftsAA1F2/QGVsPIV9Ig==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDhz81Fqv0bLOXByrOiL50k58ZIAuSB45nhnW/WXnWByvQLnOiAQN+atHSiYFPEvOQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "885c95a4-a14b-4319-82c2-83b779075f2f",
+                            SecurityStamp = "86ed4dd1-5241-4d04-be66-dac45f0efd57",
                             Sname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
@@ -313,32 +310,13 @@ namespace OnlineShop2022.Migrations
                             EmailConfirmed = false,
                             Fname = "Manager",
                             LockoutEnabled = false,
-                            NormalizedEmail = "MANAGER@MANAGER.COM",
                             NormalizedUserName = "MANAGER@MANAGER.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJrItY0Akfplv1zRy2oVgU+Jl/Vaf6yePDIR4cG0lF31P5EB/iR80mmKgT7j3Ej6eg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPlryIH5BE+ejBv9L/WsyW1gtLGCZ+679O/ZqZ4tVRAu/zqzrsoKigNgGiGgUviDnA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b1bb44c3-da7a-43a6-9039-105d68512860",
+                            SecurityStamp = "a2a82072-3383-4a60-9a5d-4e97cc68ab8c",
                             Sname = "Manager",
                             TwoFactorEnabled = false,
                             UserName = "manager@manager.com"
-                        },
-                        new
-                        {
-                            Id = "27b9af34-a133-43e2-8dd2-aef04ddb2b8e",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "9b483dfe-e56c-4d5b-97cd-b32652794d29",
-                            Email = "customer@customer.com",
-                            EmailConfirmed = false,
-                            Fname = "Customer",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "CUSTOMER@CUSTOMER.COM",
-                            NormalizedUserName = "CUSTOMER@CUSTOMER.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELLSpemNnoi9qi+wqgzZT2kzZIntJOVuQzgoUuHqh8e7XMmj1lcZYBlUs+yQe1e9Gg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "b537b43b-3a35-4040-8ff5-f041eefa7a93",
-                            Sname = "Customer",
-                            TwoFactorEnabled = false,
-                            UserName = "customer@customer.com"
                         });
                 });
 
