@@ -28,7 +28,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\js\checkout.js" />
+    <None Include="wwwroot\js\checkout.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\js\site.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

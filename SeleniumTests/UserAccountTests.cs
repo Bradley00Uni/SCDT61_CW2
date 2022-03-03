@@ -13,7 +13,7 @@ namespace SeleniumTests
         private string loginEmail;
 
         //Sets the Chrome Driver that will be used by Selenium
-        IWebDriver driver = new ChromeDriver("D:\\Level 6\\SCDT61 -  Software Development & QA\\Assignments\\Assignment 2");
+        IWebDriver driver = new ChromeDriver();
 
         //Method that when called, sets the login variables to the Admin credentials
         private void PopulateAdmin()
@@ -73,16 +73,46 @@ namespace SeleniumTests
             Logout();
         }
 
-        [Test]
+        [Test] //This test checks that users can successfully register an account 
         public void RegisterSuccessTest()
         {
-            //Tests that user can register for an account
+            //Finds and clicks the link to naviagte: Login Page --> Register Page
+            IWebElement registerLink = driver.FindElement(By.Id("register-link"));
+            registerLink.Click();
+
+            //Wait for the page to load, then get the new URL
+            Thread.Sleep(1000);
+            var currentURL = driver.Url;
+
+            //Create an Array containing all fields in the registration form
+            IWebElement[] registerForm = new IWebElement[]
+            {
+                driver.FindElement(By.Id("Input_Fname")),
+                driver.FindElement(By.Id("Input_Sname")),
+                driver.FindElement(By.Id("Input_Email")),
+                driver.FindElement(By.Id("Input_Password")),
+                driver.FindElement(By.Id("Input_ConfirmPassword")),
+            };
+
+            //Create an Array containing all the details to be entered into the form
+            string[] details = new string[] { "Example", "Surname", "selenium@example.com", "Password123!", "Password123!" };
+
+
+            //For each field in the form, enter the relevant information
+            var x = 0;
+            foreach(var r in registerForm){ r.SendKeys(details[x]); x++; }
+            //Submit the form
+            registerForm[4].SendKeys(Keys.Return);
+
+            //Waits before executing next line of code, to ensure slow loading times don't compromise test results
+            Thread.Sleep(1000);
+
+            //Checks if the URL has changed, indicating a successful page load. If true, pass the test, else fail. Page will only change on successful register/login
+            if (driver.Url != currentURL){ Assert.Pass();}
+            else{ Assert.Fail(); }
         }
 
         [OneTimeTearDown]
-        public void End()
-        {
-            driver.Close();
-        }
+        public void End(){ driver.Close(); }
     }
 }
