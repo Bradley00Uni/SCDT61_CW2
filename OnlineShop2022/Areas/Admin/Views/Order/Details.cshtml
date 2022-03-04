@@ -2,63 +2,93 @@
 
 @{
     ViewData["Title"] = "Order Details";
+
+    var shortDate = @Model.OrderPlaced.ToString();
 }
 
 <h1>Order Details</h1>
 
 <div>
-    <h4>OrderModel</h4>
+    <h4> Order Number: @Model.OrderId | @shortDate.Substring(0,10)</h4>
     <hr />
+    <div class="row">
+    <div class="col-md-8">
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.FirstName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.LastName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.AddressLine1)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.AddressLine1)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.AddressLine2)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.AddressLine2)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.Postcode)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.Postcode)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.City)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.City)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.Country)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.Country)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class = "col-sm-4">
             @Html.DisplayNameFor(model => model.Email)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class = "col-sm-8">
             @Html.DisplayFor(model => model.Email)
         </dd>
     </dl>
+    </div>
+        <div class="col-md-4">
+            <!--Return List of Products-->
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Quantity</th>
+                        <th>Description</th>
+                        <th class="text-right">Price</th>
+                        <th class="text-right">Subtotal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var product in Model.OrderLines)
+                    {
+                        <tr>
+                            <td class="text-center">@product.Amount</td>
+                            <td class="text-left">@product.Product.Description</td>
+                            <td class="text-right">@product.Product.Price.ToString("c")</td>
+                            <td class="text-right"> @((product.Amount*product.Product.Price).ToString("c"))
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.OrderId" class="btn btn-secondary">Edit</a> |

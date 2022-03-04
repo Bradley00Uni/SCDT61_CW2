@@ -38,6 +38,7 @@ namespace OnlineShop2022
 
             var orderModel = await _context.Orders
                 .FirstOrDefaultAsync(m => m.OrderId == id);
+            orderModel.OrderLines = await _context.OrderDetails.Where(m => m.OrderId == orderModel.OrderId).Include("Product").ToListAsync();
             if (orderModel == null)
             {
                 return NotFound();
