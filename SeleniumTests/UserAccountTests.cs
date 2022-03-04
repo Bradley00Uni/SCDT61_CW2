@@ -227,6 +227,24 @@ namespace SeleniumTests
 
         }
 
+        [Test]
+        public void ManageUserRoles()
+        {
+            Login("admin");
+
+            driver.FindElement(By.Id("adminLink")).Click();
+            driver.FindElement(By.Id("User Management")).Click();
+
+            driver.FindElement(By.Id("Example Surname")).FindElement(By.Id("manageButton")).Click();
+            Thread.Sleep(600);
+
+            driver.FindElement(By.Id("Manager")).Click();
+            driver.FindElement(By.Id("update")).Click();
+
+            Thread.Sleep(600);
+            //Check role has been updated
+        }
+
         [OneTimeTearDown]
         public void End(){ driver.Close(); }
     }

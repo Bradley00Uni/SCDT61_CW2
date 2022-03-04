@@ -21,16 +21,16 @@
     <tbody>
         @foreach (var user in Model)
         {
-            <tr>
+            <tr id="@user.User.Fname @user.User.Sname">
                 <td>@user.User.Id</td>
                 <td>@user.User.Fname</td>
                 <td>@user.User.Sname</td>
                 <td>@string.Join(" , ", user.Roles.ToList())</td>
                 <td>
-                    <a class="btn btn-secondary" asp-action="Manage" asp-route-id="@user.User.Id">Manage Roles</a>
+                    <a class="btn btn-secondary" asp-action="Manage" asp-route-id="@user.User.Id" id="manageButton">Manage Roles</a>
                 </td>
                  <td>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@user.User.Id">Delete User</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@user.User.Id" id="deleteButton">Delete User</a>
                 </td>
             </tr>
         }
