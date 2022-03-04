@@ -235,14 +235,24 @@ namespace SeleniumTests
             driver.FindElement(By.Id("adminLink")).Click();
             driver.FindElement(By.Id("User Management")).Click();
 
-            driver.FindElement(By.Id("Example Surname")).FindElement(By.Id("manageButton")).Click();
+            var targetField = driver.FindElement(By.Id("Example Surname"));
+            targetField.FindElement(By.Id("manageButton")).Click();
             Thread.Sleep(600);
 
             driver.FindElement(By.Id("Manager")).Click();
             driver.FindElement(By.Id("update")).Click();
 
-            Thread.Sleep(600);
-            //Check role has been updated
+            Thread.Sleep(1000);
+
+            targetField = driver.FindElement(By.Id("Example Surname"));
+            if (targetField.FindElement(By.Id("roles")).Text.Contains("Manager") == true)
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail();
+            }
         }
 
         [OneTimeTearDown]
