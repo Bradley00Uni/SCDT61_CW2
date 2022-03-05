@@ -9,12 +9,10 @@ namespace OnlineShopDeliveryAPI.Models
         [Key]
         public int OrderId { get; set; }
 
-        public List<ProductModel> Products { get; set; }
-
         public double OrderTotal { get; set; }
 
         public DateTime OrderPlaced { get; set; }
 
-        public DeliveryModel Delivery { get; set; }
+        public string OrderStatus { get; set; }
     }
 }

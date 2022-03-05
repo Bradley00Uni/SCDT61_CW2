@@ -1,12 +1,14 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using OnlineShopDeliveryAPI.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,9 +30,18 @@ namespace OnlineShopDeliveryAPI
         {
 
             services.AddControllers();
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnectionString"));
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "OnlineShopDeliveryAPI", Version = "v1" });
+            });
+
+            services.AddMvc(options =>
+            {
+                options.SuppressAsyncSuffixInActionNames = false;
             });
         }
 

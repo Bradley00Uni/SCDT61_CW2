@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineShopDeliveryAPI.Models
 {
@@ -37,6 +38,10 @@ namespace OnlineShopDeliveryAPI.Models
         [Required]
         [Display(Name = "Country")]
         public string Country { get; set; }
+
+        public int OrderID { get; set; }
+        [ForeignKey("OrderID")]
+        public OrderModel Order { get; set; }
 
     }
 }
