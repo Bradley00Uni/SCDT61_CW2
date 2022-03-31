@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShopDeliveryAPI.Data;
 
 namespace OnlineShopDeliveryAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220331183536_users")]
+    partial class users
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,12 +80,7 @@ namespace OnlineShopDeliveryAPI.Migrations
                     b.Property<double>("OrderTotal")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("UserID")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("OrderId");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Orders");
                 });
@@ -177,15 +174,6 @@ namespace OnlineShopDeliveryAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("OnlineShopDeliveryAPI.Models.OrderModel", b =>
-                {
-                    b.HasOne("OnlineShopDeliveryAPI.Models.UserModel", "Driver")
-                        .WithMany()
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("Driver");
                 });
 
             modelBuilder.Entity("OnlineShopDeliveryAPI.Models.ProductModel", b =>

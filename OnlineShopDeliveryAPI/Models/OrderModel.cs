@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineShopDeliveryAPI.Models
 {
@@ -14,5 +15,7 @@ namespace OnlineShopDeliveryAPI.Models
         public DateTime OrderPlaced { get; set; }
 
         public string OrderStatus { get; set; }
+
+        public string UserID { get; set; }
     }
 }
