@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeleniumTests", "SeleniumTests\SeleniumTests.csproj", "{FC8E31C3-ADB6-402A-912B-B71CD6BB70D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineShopDeliveryAPI", "OnlineShopDeliveryAPI\OnlineShopDeliveryAPI.csproj", "{33C2DAF5-2072-498F-9F95-515CDE3B26BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineShopDeliveryAPI", "OnlineShopDeliveryAPI\OnlineShopDeliveryAPI.csproj", "{33C2DAF5-2072-498F-9F95-515CDE3B26BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

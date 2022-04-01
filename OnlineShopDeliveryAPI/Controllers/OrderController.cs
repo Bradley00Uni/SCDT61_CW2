@@ -26,6 +26,25 @@ namespace OnlineShopDeliveryAPI.Controllers
             return await _context.Orders.ToListAsync();
         }
 
+        [HttpGet]
+        [Route("OrderViews")]
+        public async Task<ActionResult<IEnumerable<OrderDetailsModel>>> GetAllViewModels()
+        {
+            List<OrderDetailsModel> orderViews = new List<OrderDetailsModel>();
+            var orders = await _context.Orders.ToListAsync();
+
+            foreach(var order in orders)
+            {
+                var products = await _context.Products.Where(x => x.OrderID == order.OrderId).ToListAsync();
+
+                var deliveries = await _context.Deliveries.Where(x => x.OrderID == order.OrderId).ToListAsync();
+                var delivery = deliveries.FirstOrDefault();
+
+                orderViews.Add(new OrderDetailsModel() { Order = order, Products = products, Delivery = delivery });
+            }
+            return orderViews;
+        }
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderDetailsModel>> GetOrderModel(int id)

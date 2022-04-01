@@ -107,7 +107,6 @@ namespace OnlineShop2022.Models
                 response = await client.PostAsync("https://localhost:44380/api/products", httpContent);
                 responseString = await response.Content.ReadAsStringAsync();
             }
-
         }
     }
 }
