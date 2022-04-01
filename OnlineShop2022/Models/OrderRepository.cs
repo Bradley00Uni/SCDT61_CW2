@@ -72,6 +72,42 @@ namespace OnlineShop2022.Models
 
             var response = await client.PostAsync("https://localhost:44380/api/orders", httpContent);
             var responseString = await response.Content.ReadAsStringAsync();
+
+            var deliveryValues = new Dictionary<string, string>
+            {
+                {"firstName", order.FirstName },
+                {"lastName", order.LastName },
+                {"email", order.Email },
+                {"addressLine1", order.AddressLine1 },
+                {"addressLine2", order.AddressLine2 },
+                {"postCode", order.Postcode },
+                {"city", order.City },
+                {"country", order.Country },
+                {"orderID", order.OrderId.ToString() }
+            };
+
+            content = Newtonsoft.Json.JsonConvert.SerializeObject(deliveryValues);
+            httpContent = new StringContent(content, Encoding.UTF8 ,"application/json");
+
+            response = await client.PostAsync("https://localhost:44380/api/deliveries", httpContent);
+            responseString = await response.Content.ReadAsStringAsync();
+
+            foreach(var product in lines)
+            {
+                var productValues = new Dictionary<string, string>();
+
+                productValues.Add("productName", product.Product.Description);
+                productValues.Add("amount", product.Amount.ToString());
+                productValues.Add("price", product.Price.ToString());
+                productValues.Add("orderID", order.OrderId.ToString());
+
+                content = Newtonsoft.Json.JsonConvert.SerializeObject(productValues);
+                httpContent = new StringContent(content, Encoding.UTF8, "application/json");
+
+                response = await client.PostAsync("https://localhost:44380/api/products", httpContent);
+                responseString = await response.Content.ReadAsStringAsync();
+            }
+
         }
     }
 }

@@ -93,11 +93,19 @@ namespace OnlineShopDeliveryAPI.Controllers
             }
 
             var products = await _context.Products.Where(x => x.OrderID == order.OrderId).ToListAsync();
-            var deliveries = await _context.Deliveries.Where(x => x.OrderID == order.OrderId).ToListAsync();
-            var delivery = deliveries.FirstOrDefault();
 
-            _context.Products.RemoveRange(products);
-            _context.Deliveries.Remove(delivery);
+            if(products != null)
+            {
+                _context.Products.RemoveRange(products);
+            }
+
+            var deliveries = await _context.Deliveries.Where(x => x.OrderID == order.OrderId).ToListAsync();
+
+            if(deliveries != null)
+            {
+                _context.Deliveries.RemoveRange(deliveries);
+            }
+
             _context.Orders.Remove(order);
             await _context.SaveChangesAsync();
 
