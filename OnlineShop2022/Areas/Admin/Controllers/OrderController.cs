@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ namespace OnlineShop2022
     public class OrderController : Controller
     {
         private readonly AppDbContext _context;
+        static readonly HttpClient client = new HttpClient();
 
         public OrderController(AppDbContext context)
         {
@@ -147,6 +149,38 @@ namespace OnlineShop2022
             _context.Orders.Remove(orderModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> UpdateStatus()
+        {
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44380/api/orders");
+                response.EnsureSuccessStatusCode();
+
+                List<DeliveryOrderModel> orders = Newtonsoft.Json.JsonConvert.DeserializeObject<List<DeliveryOrderModel>>(await response.Content.ReadAsStringAsync());
+
+                var currentOrders = await _context.Orders.ToListAsync();
+
+                foreach(var order in orders)
+                {
+                    var i = 0;
+                    if(order.OrderId == currentOrders[i].OrderId)
+                    {
+                        var orderModel = await _context.Orders.FindAsync(currentOrders[i].OrderId);
+                        orderModel.OrderStatus = order.OrderStatus;
+                        _context.Update(orderModel);
+                        await _context.SaveChangesAsync();
+                        break;
+                    }
+                    else { i++; }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch (HttpRequestException e)
+            {
+                return NotFound(e.Message); 
+            }
         }
 
         private bool OrderModelExists(int id)

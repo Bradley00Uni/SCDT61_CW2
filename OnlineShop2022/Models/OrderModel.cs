@@ -60,5 +60,7 @@ namespace OnlineShop2022.Models
         //[ScaffoldColumn(false)]
         public DateTime OrderPlaced { get; set; }
 
+        public string OrderStatus { get; set; }
+
     }
 }

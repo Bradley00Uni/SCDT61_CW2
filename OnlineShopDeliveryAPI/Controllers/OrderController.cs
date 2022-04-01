@@ -76,7 +76,7 @@ namespace OnlineShopDeliveryAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> PostOrderModel(int id, OrderModel OrderModel)
         {
-            OrderModel.OrderStatus = "Processing";
+            OrderModel.OrderPlaced = System.DateTime.Now;
             _context.Orders.Add(OrderModel);
             await _context.SaveChangesAsync();
 

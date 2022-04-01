@@ -37,6 +37,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -71,9 +74,13 @@
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.OrderStatus)
+            </td>
+            <td>
                 <a asp-action="Edit" asp-route-id="@item.OrderId" class="btn btn-secondary">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.OrderId" class="btn btn-secondary">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.OrderId" class="btn btn-danger">Delete</a>
+                <a asp-action="UpdateStatus" class="btn btn-danger">Update</a>
             </td>
         </tr>
 }
