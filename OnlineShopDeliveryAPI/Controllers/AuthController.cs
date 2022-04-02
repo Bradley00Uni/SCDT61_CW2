@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 
 namespace OnlineShopDeliveryAPI.Controllers
 {
+    [Route("api/auth")]
+    [ApiController]
     public class AuthController : ControllerBase
     {
         private readonly SignInManager<UserModel> signInManager;
@@ -78,7 +80,7 @@ namespace OnlineShopDeliveryAPI.Controllers
         [Route("Logout")]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync();
+           
             return Ok(new { Message = "You are logged out" });
         }
 
