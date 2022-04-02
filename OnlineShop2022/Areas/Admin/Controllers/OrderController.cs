@@ -155,7 +155,7 @@ namespace OnlineShop2022
         {
             try
             {
-                HttpResponseMessage response = await client.GetAsync("https://localhost:44380/api/orders");
+                HttpResponseMessage response = await client.GetAsync("https://onlineshopdeliveryapi20220402003022.azurewebsites.net/api/orders");
                 response.EnsureSuccessStatusCode();
 
                 List<DeliveryOrderModel> orders = Newtonsoft.Json.JsonConvert.DeserializeObject<List<DeliveryOrderModel>>(await response.Content.ReadAsStringAsync());

@@ -38,7 +38,7 @@ namespace OnlineShopDeliveryAPI
             services.AddControllers();
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnectionString"));
+                options.UseSqlite("Data Source=./Data/App.db");
             });
             services.AddSwaggerGen(c =>
             {

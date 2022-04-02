@@ -70,7 +70,7 @@ namespace OnlineShop2022.Models
             var content = Newtonsoft.Json.JsonConvert.SerializeObject(orderValues);
             var httpContent = new StringContent(content, Encoding.UTF8 ,"application/json");
 
-            var response = await client.PostAsync("https://localhost:44380/api/orders", httpContent);
+            var response = await client.PostAsync("https://onlineshopdeliveryapi20220402003022.azurewebsites.net/api/orders", httpContent);
             var responseString = await response.Content.ReadAsStringAsync();
 
             var deliveryValues = new Dictionary<string, string>
@@ -89,7 +89,7 @@ namespace OnlineShop2022.Models
             content = Newtonsoft.Json.JsonConvert.SerializeObject(deliveryValues);
             httpContent = new StringContent(content, Encoding.UTF8 ,"application/json");
 
-            response = await client.PostAsync("https://localhost:44380/api/deliveries", httpContent);
+            response = await client.PostAsync("https://onlineshopdeliveryapi20220402003022.azurewebsites.net/api/deliveries", httpContent);
             responseString = await response.Content.ReadAsStringAsync();
 
             foreach(var product in lines)
@@ -104,7 +104,7 @@ namespace OnlineShop2022.Models
                 content = Newtonsoft.Json.JsonConvert.SerializeObject(productValues);
                 httpContent = new StringContent(content, Encoding.UTF8, "application/json");
 
-                response = await client.PostAsync("https://localhost:44380/api/products", httpContent);
+                response = await client.PostAsync("https://onlineshopdeliveryapi20220402003022.azurewebsites.net/api/products", httpContent);
                 responseString = await response.Content.ReadAsStringAsync();
             }
         }
