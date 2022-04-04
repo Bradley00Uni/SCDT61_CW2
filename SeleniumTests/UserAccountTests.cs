@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace SeleniumTests
 {
-    public class Tests
+    public class UserAccountTests
     {
         //Global Variables that store the relevant login details as needed by the tests
         private string loginName;
