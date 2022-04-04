@@ -28,7 +28,7 @@
                 <td>@product.Description</td>
                 <td>@product.Price</td>
                 <td><img src="@product.ImagePath" class="img-thumbnail img-product"></td>
-                <td>
+                <td id="@product.Id buttons">
                     <a class="btn btn-secondary" asp-controller="Product" asp-action="Update" asp-route-id="@product.Id">Edit</a>
                     <a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
                 </td>

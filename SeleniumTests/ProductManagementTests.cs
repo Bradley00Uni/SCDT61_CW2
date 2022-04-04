@@ -180,11 +180,39 @@ namespace SeleniumTests
             }
         }
 
+        [Test]
+        public void AdminProductEdting()
+        {
+            var originalDesc = "Desk";
+            var originalCategory = "Furniture";
+
+            Login("admin");
+            driver.Navigate().GoToUrl("https://onlineshop202220220302112626.azurewebsites.net/Admin/Product/Update/3");
+
+            driver.FindElement(By.Id("Product.Description")).Clear();
+            driver.FindElement(By.Id("Product.Description")).SendKeys("Corner Workstation");
+
+            var dropdown = driver.FindElement(By.Id("Product_CategoryId"));
+            dropdown.SendKeys(Keys.ArrowDown);
+            dropdown.SendKeys(Keys.Return);
+
+            driver.FindElement(By.LinkText("Submit")).Click();
+            Thread.Sleep(1000);
+
+            if (driver.FindElement(By.ClassName("table-striped")).Text.Contains(originalDesc) == false && driver.FindElement(By.ClassName("table-striped")).Text.Contains(originalCategory) == false)
+            {
+                Logout();
+                Assert.Pass();
+            }
+            else
+            {
+                Console.WriteLine("Values not Updated");
+                Assert.Fail();
+            }
+        }
+
         [OneTimeTearDown]
         public void End() { driver.Close(); }
-
-        //View Procuct Magement and Update Category
-        //Add, Edit and Delete Product
 
     }
 }
