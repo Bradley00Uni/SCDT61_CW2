@@ -124,11 +124,36 @@ namespace SeleniumTests
             }
         }
 
+        [Test]
+        public void AdminCategoryManagement()
+        {
+            Login("admin");
+            driver.FindElement(By.Id("adminLink")).Click();
+            driver.FindElement(By.Id("Category Management")).Click();
+            driver.FindElement(By.Id("Create")).Click();
+
+            var targetField = driver.FindElement(By.Id("Name"));
+            targetField.SendKeys("House Plant");
+            targetField.SendKeys(Keys.Return);
+            Thread.Sleep(500);
+
+            if(driver.FindElement(By.ClassName("table")).Text.Contains("House Plant"))
+            {
+                Logout();
+                Assert.Pass();
+            }
+            else
+            {
+                Console.WriteLine("Category Creation Failed");
+                Assert.Fail();
+            }
+
+            
+        }
+
         [OneTimeTearDown]
         public void End() { driver.Close(); }
 
-        //Can navigate to Browse page
-        //View and Add Categories
         //View Procuct Magement and Update Category
         //Add, Edit and Delete Product
 

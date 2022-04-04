@@ -23,7 +23,7 @@ namespace OnlineShop2022.Components
             new AdminMenuItem()
             {
                 DisplayValue = "Category Management",
-                ControllerValue = "Category"
+                ControllerValue = "Category",
             }};
 
             return View(menuItems);
