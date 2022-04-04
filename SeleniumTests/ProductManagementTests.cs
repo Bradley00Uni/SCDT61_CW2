@@ -8,6 +8,7 @@ using System.Threading;
 namespace SeleniumTests
 {
     public class ProductManagementTests
+    {
         private string loginName;
         private string loginPassword;
         private string loginEmail;
@@ -89,7 +90,7 @@ namespace SeleniumTests
         {
             Login("customer");
 
-            if (driver.FindElement(By.Id("product 2")).Text.Contains("3 Stack Shelving") && driver.FindElement(By.Id("product 3")).Text.Contains("Desk"))
+            if (driver.FindElement(By.Id("product 2 desc")).Text.Contains("3 Stack Shelving") && driver.FindElement(By.Id("product 3 desc")).Text.Contains("Desk"))
             {
                 Logout();
                 Assert.Pass();
