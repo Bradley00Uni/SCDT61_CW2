@@ -102,14 +102,37 @@ namespace SeleniumTests
             }
         }
 
+        [Test]
+        public void NaviagateToProductBrowse()
+        {
+            Login("customer");
+
+            driver.FindElement(By.Id("Browse")).Click();
+            Thread.Sleep(500);
+
+            var newURL = driver.Url;
+
+            if(newURL == "https://onlineshop202220220302112626.azurewebsites.net/Home/Products")
+            {
+                Logout();
+                Assert.Pass();
+            }
+            else
+            {
+                Console.WriteLine("Wrong View Returned");
+                Assert.Fail();
+            }
+        }
+
         [OneTimeTearDown]
         public void End() { driver.Close(); }
 
-        //Product Details are Shown
         //Can navigate to Browse page
         //View and Add Categories
         //View Procuct Magement and Update Category
         //Add, Edit and Delete Product
+
+        //https://onlineshop202220220302112626.azurewebsites.net/Home/Products
 
     }
 }
