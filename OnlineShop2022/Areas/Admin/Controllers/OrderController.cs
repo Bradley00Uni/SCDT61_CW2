@@ -12,7 +12,7 @@ using OnlineShop2022.Models;
 
 namespace OnlineShop2022
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Manager")]
     [Area("Admin")]
     public class OrderController : Controller
     {
