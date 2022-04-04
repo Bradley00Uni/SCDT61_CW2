@@ -147,8 +147,37 @@ namespace SeleniumTests
                 Console.WriteLine("Category Creation Failed");
                 Assert.Fail();
             }
+        }
 
-            
+        [Test]
+        public void AdminProductManagement()
+        {
+            Login("admin");
+            driver.Navigate().GoToUrl("https://onlineshop202220220302112626.azurewebsites.net/Admin/Product");
+            driver.FindElement(By.Id("Create")).Click();
+
+            driver.FindElement(By.Id("Product.Description")).SendKeys("Lemon Tree");
+            driver.FindElement(By.Id("Product.Price")).SendKeys("40");
+            var dropdown = driver.FindElement(By.Id("Product_CategoryId"));
+            dropdown.SendKeys(Keys.ArrowDown);
+            dropdown.SendKeys(Keys.ArrowDown);
+            dropdown.SendKeys(Keys.Return);
+
+            driver.FindElement(By.Id("Product.ImagePath")).SendKeys("C:\\Users\\bradl\\Documents\\SCDT61_Cw2\\OnlineShop2022---TBF-master\\SeleniumTests\\resources\\lemon_tree.jpg");
+
+            driver.FindElement(By.Id("Submit")).Click();
+            Thread.Sleep(1000);
+
+            if(driver.FindElement(By.ClassName("table-striped")).Text.Contains("Lemon Tree"))
+            {
+                Logout();
+                Assert.Pass();
+            }
+            else
+            {
+                Console.WriteLine("Product Creation Failed");
+                Assert.Fail();
+            }
         }
 
         [OneTimeTearDown]
@@ -156,8 +185,6 @@ namespace SeleniumTests
 
         //View Procuct Magement and Update Category
         //Add, Edit and Delete Product
-
-        //https://onlineshop202220220302112626.azurewebsites.net/Home/Products
 
     }
 }
