@@ -87,6 +87,29 @@ namespace OnlineShopDeliveryAPI.Controllers
             return orderViews;
         }
 
+        [HttpGet("CompleteOrders/{driver}")]
+        public async Task<ActionResult<IEnumerable<OrderDetailsModel>>> GetAllCompleteOrders(string driver)
+        {
+            List<OrderDetailsModel> orderViews = new List<OrderDetailsModel>();
+            var orders = await _context.Orders.Where(x => x.UserID == driver).Where(x => x.OrderStatus == "Delivered").ToListAsync();
+
+            if (orders == null || orders.Count == 0)
+            {
+                return NotFound();
+            }
+
+            foreach (var order in orders)
+            {
+                var products = await _context.Products.Where(x => x.OrderID == order.OrderId).ToListAsync();
+
+                var deliveries = await _context.Deliveries.Where(x => x.OrderID == order.OrderId).ToListAsync();
+                var delivery = deliveries.FirstOrDefault();
+
+                orderViews.Add(new OrderDetailsModel() { Order = order, Products = products, Delivery = delivery });
+            }
+            return orderViews;
+        }
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<OrderDetailsModel>> GetOrderModel(int id)

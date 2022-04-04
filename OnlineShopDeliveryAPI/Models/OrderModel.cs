@@ -14,6 +14,7 @@ namespace OnlineShopDeliveryAPI.Models
 
         public DateTime OrderPlaced { get; set; }
 
+        [Display(Name = "Order Status")]
         public string OrderStatus { get; set; }
 
         public string UserID { get; set; }
