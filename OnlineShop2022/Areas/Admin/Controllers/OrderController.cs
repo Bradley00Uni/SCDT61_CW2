@@ -130,8 +130,10 @@ namespace OnlineShop2022
                 return NotFound();
             }
 
-            var orderModel = await _context.Orders
-                .FirstOrDefaultAsync(m => m.OrderId == id);
+            var orderModel = await _context.Orders.FirstOrDefaultAsync(m => m.OrderId == id);
+            HttpResponseMessage response = await client.DeleteAsync("https://onlineshopdeliveryapi20220402003022.azurewebsites.net/api/orders/" + orderModel.OrderId);
+            response.EnsureSuccessStatusCode();
+
             if (orderModel == null)
             {
                 return NotFound();
@@ -162,18 +164,21 @@ namespace OnlineShop2022
 
                 var currentOrders = await _context.Orders.ToListAsync();
 
-                foreach(var order in orders)
+                if(orders != null && currentOrders != null)
                 {
-                    var i = 0;
-                    if(order.OrderId == currentOrders[i].OrderId)
+                    foreach (var order in orders)
                     {
-                        var orderModel = await _context.Orders.FindAsync(currentOrders[i].OrderId);
-                        orderModel.OrderStatus = order.OrderStatus;
-                        _context.Update(orderModel);
-                        await _context.SaveChangesAsync();
-                        break;
+                        var i = 0;
+                        if (order.OrderId == currentOrders[i].OrderId)
+                        {
+                            var orderModel = await _context.Orders.FindAsync(currentOrders[i].OrderId);
+                            orderModel.OrderStatus = order.OrderStatus;
+                            _context.Update(orderModel);
+                            await _context.SaveChangesAsync();
+                            break;
+                        }
+                        else { i++; }
                     }
-                    else { i++; }
                 }
                 return RedirectToAction(nameof(Index));
             }
