@@ -9,7 +9,7 @@
             <div class="form-group">
                 <label asp-for="LastName" class="col-md-2 control-label"></label>
                 <div class="col-md">
-                    <input asp-for="LastName" class="form-control" />
+                    <input asp-for="LastName" id="LastName" class="form-control" />
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                 <label asp-for="FirstName" class="col-md-2 control-label"></label>
                 <div class="col-md">
                     <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                    <span asp-validation-for="FirstName" id="Firstname" class="text-danger"></span>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                 <label asp-for="AddressLine1" class="col-md-2 control-label"></label>
                 <div class="col-md">
                     <input asp-for="AddressLine1" class="form-control" />
-                    <span asp-validation-for="AddressLine1" class="text-danger"></span>
+                    <span asp-validation-for="AddressLine1" id="AddressLine1" class="text-danger"></span>
                 </div>
             </div>
 
@@ -34,7 +34,7 @@
                 <label asp-for="AddressLine2" class="col-md-2 control-label"></label>
                 <div class="col-md">
                     <input asp-for="AddressLine2" class="form-control" />
-                    <span asp-validation-for="AddressLine2" class="text-danger"></span>
+                    <span asp-validation-for="AddressLine2" id="AddressLine2" class="text-danger"></span>
                 </div>
             </div>
 
@@ -42,7 +42,7 @@
                 <label asp-for="Postcode" class="col-md-2 control-label"></label>
                 <div class="col-md">
                     <input asp-for="Postcode" class="form-control" />
-                    <span asp-validation-for="Postcode" class="text-danger"></span>
+                    <span asp-validation-for="Postcode" id="Postcode" class="text-danger"></span>
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
                 <label asp-for="City" class="col-md-2 control-label"></label>
                 <div class="col-md">
                     <input asp-for="City" class="form-control" />
-                    <span asp-validation-for="City" class="text-danger"></span>
+                    <span asp-validation-for="City" id="City" class="text-danger"></span>
                 </div>
             </div>
 
@@ -59,7 +59,7 @@
                 <label asp-for="Country" class="col-md-2 control-label"></label>
                 <div class="col-md">
                     <input asp-for="Country" class="form-control" />
-                    <span asp-validation-for="Country" class="text-danger"></span>
+                    <span asp-validation-for="Country" id="Country" class="text-danger"></span>
                 </div>
             </div>
 
@@ -68,13 +68,13 @@
                 <label asp-for="Email" class="col-md-2 control-label"></label>
                   <div class="col-md">
                     <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <span asp-validation-for="Email" id="Email" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md w-100 mt-4">
-                    <button type="submit" class="btn btn-primary"> Proceed to Payment</button>
+                    <button type="submit" id="Submit" class="btn btn-primary"> Proceed to Payment</button>
                 </div>
             </div>
 
