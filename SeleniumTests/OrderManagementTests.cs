@@ -44,8 +44,8 @@ namespace SeleniumTests
             Login();
         }
 
-        [Test]
-        public void SuccessfulOrderCreation()
+        [Test] //Tests that orders can be successfully created using the shopping cart form on the website
+        public void SuccessfulOrderCreation() 
         {
             driver.FindElement(By.Id("product 2")).FindElement(By.ClassName("btn")).Click();
             Thread.Sleep(100);
@@ -75,7 +75,7 @@ namespace SeleniumTests
             }
         }
 
-        [Test]
+        [Test] //Tests that Admin users can successfully manage Orders
         public void AdminOrderManagement()
         {
             var startUrl = "https://onlineshop202220220302112626.azurewebsites.net/Admin/Order";
@@ -100,7 +100,7 @@ namespace SeleniumTests
             }
         }
 
-        [Test]
+        [Test] //Tests that Admin users can successfully delete Orders
         public void SuccessfulOrderRemoval()
         {
             var startUrl = "https://onlineshop202220220302112626.azurewebsites.net/Admin/Order";
@@ -120,8 +120,5 @@ namespace SeleniumTests
 
         [OneTimeTearDown]
         public void End() { driver.Close(); }
-
-        //Manual Tests:
-        //Pay
     }
 }

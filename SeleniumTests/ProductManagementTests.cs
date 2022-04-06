@@ -54,7 +54,7 @@ namespace SeleniumTests
             driver.Manage().Window.Maximize();
         }
 
-        [Test]
+        [Test] //Tests that all products in the database are successfully loaded on webpage load
         public void ProductsDisplayedOnLoad()
         {
             var productCount = 0;
@@ -73,7 +73,7 @@ namespace SeleniumTests
                 productCount++;
             }
 
-            if(productCount == 3)
+            if(productCount == 3) //Passes if all three dummy-products are present
             {
                 Logout();
                 Assert.Pass();
@@ -85,7 +85,7 @@ namespace SeleniumTests
             }
         }
 
-        [Test]
+        [Test] //Tests that product descriptions are correctly rendered with their coresponding products
         public void ProductDescriptionsDisplayed()
         {
             Login("customer");
@@ -124,7 +124,7 @@ namespace SeleniumTests
             }
         }
 
-        [Test]
+        [Test] //Tests that Admin users can manmage Categories
         public void AdminCategoryManagement()
         {
             Login("admin");
@@ -149,7 +149,7 @@ namespace SeleniumTests
             }
         }
 
-        [Test]
+        [Test] //Tests that Admin users can create Products
         public void AdminProductManagement()
         {
             Login("admin");
@@ -180,7 +180,7 @@ namespace SeleniumTests
             }
         }
 
-        [Test]
+        [Test] //Tests that Admin users can edit Product Details
         public void AdminProductEdting()
         {
             var originalDesc = "Desk";
@@ -199,7 +199,8 @@ namespace SeleniumTests
             driver.FindElement(By.LinkText("Submit")).Click();
             Thread.Sleep(1000);
 
-            if (driver.FindElement(By.ClassName("table-striped")).Text.Contains(originalDesc) == false && driver.FindElement(By.ClassName("table-striped")).Text.Contains(originalCategory) == false)
+            if (driver.FindElement(By.ClassName("table-striped")).Text.Contains(originalDesc) == false && driver.FindElement(By.ClassName("table-striped"))
+                .Text.Contains(originalCategory) == false)
             {
                 Logout();
                 Assert.Pass();
